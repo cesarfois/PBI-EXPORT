@@ -1,0 +1,28 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[functions]
+  external_node_modules = ["express", "serverless-http", "http-proxy-middleware", "cors"]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/DocuWare/*"
+  to = "/.netlify/functions/api"
+  status = 200
+
+[[redirects]]
+  from = "/docuware-proxy/*"
+  to = "/.netlify/functions/api"
+  status = 200
+
+[[redirects]]
+  from = "/discovery"
+  to = "/.netlify/functions/api/discovery"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

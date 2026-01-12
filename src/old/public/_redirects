@@ -1,0 +1,8 @@
+# DocuWare Platform API Proxy
+/DocuWare/*  https://rcsangola.docuware.cloud/DocuWare/:splat  200
+
+# Identity Service Proxy (Login)
+/docuware-proxy/*  https://login-emea.docuware.cloud/:splat  200
+
+# SPA Catch-all
+/* /index.html 200
