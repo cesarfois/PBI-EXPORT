@@ -41,22 +41,20 @@ export const tokenManager = {
      * Refreshes automatically if needed/possible.
      */
     getAccessToken: async () => {
-        if (!cachedTokens) throw new Error('No authentication session found. Please login via the App.');
+        // 1. Try Cached Token first
+        if (cachedTokens && cachedTokens.token) {
+            return cachedTokens.token;
+        }
 
-        // Check if we assume it's valid or check expiration if we tracked it. 
-        // DocuWare doesn't always strictly send expires_in in all flows, but usually does.
-        // For robustness, we will try to use it. If it fails (401), the caller might retry?
-        // Better: logic to refresh.
+        console.warn('[TokenManager] No active session found. Attempting Service Account fallback...');
 
-        // Since we don't strictly track expiry in the simplified frontend, let's implement a "Force Refresh" option 
-        // OR just try to refresh if it's been > X minutes?
-        // Let's implement a safe 'getOrRefresh' logic.
-
-        // Actually, easiest strategy: Just return current. If caller gets 401, they call `refreshToken()`.
-        // BUT, we want to PREVENT race conditions.
-        // So `refreshToken()` must be synchronized.
-
-        return cachedTokens.access_token || cachedTokens.token;
+        // 2. Fallback to Service Account
+        try {
+            return await tokenManager.loginWithServiceAccount();
+        } catch (e) {
+            console.error('[TokenManager] All auth methods failed.');
+            throw new Error('No authentication session found and Service Account failed. Please login via the App.');
+        }
     },
 
     /**
@@ -64,7 +62,10 @@ export const tokenManager = {
      * Synchronized to prevent parallel refreshes.
      */
     refreshAccessToken: async () => {
-        if (!cachedTokens || !cachedTokens.refreshToken) throw new Error('No refresh token available.');
+        if (!cachedTokens || !cachedTokens.refreshToken) {
+            console.warn('[TokenManager] No refresh token available. Trying Service Account...');
+            return await tokenManager.loginWithServiceAccount();
+        }
 
         console.log('[TokenManager] Refreshing token...');
 
@@ -76,10 +77,9 @@ export const tokenManager = {
 
         try {
             // We need the token endpoint. Saved in tokens?
-            const tokenEndpoint = cachedTokens.tokenEndpoint || 'https://login-emea.docuware.cloud/oauth/token'; // Fallback dangerous
-
-            // If tokenEndpoint is missing, we might be in trouble unless we look it up.
-            // But authService usually saves it.
+            // If missing, we must discover it (hard without a base URL context unless saved)
+            // Ideally, we saved 'tokenEndpoint' in cachedTokens
+            const tokenEndpoint = cachedTokens.tokenEndpoint || 'https://login-emea.docuware.cloud/oauth/token';
 
             const response = await axios.post(tokenEndpoint, params, {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -104,7 +104,68 @@ export const tokenManager = {
 
         } catch (err) {
             console.error('[TokenManager] Refresh failed:', err.response?.data || err.message);
-            throw new Error('Session expired or invalid. Please login again.');
+            // Fallback to Service Account on hard failure
+            console.warn('[TokenManager] Refresh failed. Attempting Service Account login...');
+            return await tokenManager.loginWithServiceAccount();
+        }
+    },
+
+    /**
+     * Login using Service Account Credentials (ROPC Flow)
+     * This is the robust fallback for background tasks.
+     */
+    loginWithServiceAccount: async () => {
+        const username = process.env.DOCUWARE_USERNAME;
+        const password = process.env.DOCUWARE_PASSWORD;
+
+        if (!username || !password) {
+            throw new Error("Service Account credentials (DOCUWARE_USERNAME/PASSWORD) not configured in .env");
+        }
+
+        console.log('[TokenManager] 🔄 Attempting Service Account Login...');
+
+        try {
+            // We need a Token Endpoint. 
+            // Since we might not have a session, we need a default one or discover it from a known Org URL?
+            // Problem: Multi-tenant URLs vary. 
+            // Solution: Use the hardcoded main endpoint if known, or rely on a configured Base URL in .env?
+            // Let's rely on cachedTokens.tokenEndpoint if available, OR a default EMEA one if empty. 
+            // Better: Add DOCUWARE_ORG_URL to .env for discovery, but for now let's try the standard one.
+            const tokenEndpoint = (cachedTokens && cachedTokens.tokenEndpoint) || 'https://login-emea.docuware.cloud/oauth/token';
+
+            const params = new URLSearchParams();
+            params.append('grant_type', 'password');
+            params.append('username', username);
+            params.append('password', password);
+            params.append('client_id', process.env.VITE_DOCUWARE_CLIENT_ID || 'docuware.platform');
+            params.append('client_secret', process.env.VITE_DOCUWARE_CLIENT_SECRET || '');
+            params.append('scope', 'docuware.platform offline_access');
+
+            const response = await axios.post(tokenEndpoint, params, {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            });
+
+            const { access_token, refresh_token, expires_in } = response.data;
+
+            // Save new session
+            cachedTokens = {
+                ...cachedTokens, // Keep other info like tokenEndpoint if possible
+                token: access_token,
+                accessToken: access_token,
+                refreshToken: refresh_token,
+                expiresAt: Date.now() + ((expires_in || 3600) * 1000),
+                updatedAt: new Date().toISOString(),
+                isServiceAccount: true
+            };
+
+            await fs.writeFile(TOKENS_FILE, JSON.stringify(cachedTokens, null, 2));
+            console.log('[TokenManager] ✅ Service Account Login Successful.');
+
+            return access_token;
+
+        } catch (error) {
+            console.error('[TokenManager] ❌ Service Account Login Failed:', error.response?.data || error.message);
+            throw error;
         }
     }
 };
