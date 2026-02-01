@@ -130,16 +130,28 @@ export const tokenManager = {
             // Problem: Multi-tenant URLs vary. 
             // Solution: Use the hardcoded main endpoint if known, or rely on a configured Base URL in .env?
             // Let's rely on cachedTokens.tokenEndpoint if available, OR a default EMEA one if empty. 
-            // Better: Add DOCUWARE_ORG_URL to .env for discovery, but for now let's try the standard one.
-            const tokenEndpoint = (cachedTokens && cachedTokens.tokenEndpoint) || 'https://login-emea.docuware.cloud/oauth/token';
+            // Use Org-Specific Endpoint (Required for ROPC with docuware.platform.net.client)
+            const orgId = process.env.DOCUWARE_ORG_ID;
+            console.log(`[TokenManager] Service Login > Org ID: ${orgId}`);
+            let tokenEndpoint = 'https://login-emea.docuware.cloud/connect/token'; // Fallback
+
+            if (orgId) {
+                tokenEndpoint = `https://login-emea.docuware.cloud/${orgId}/connect/token`;
+            } else if (cachedTokens && cachedTokens.tokenEndpoint) {
+                tokenEndpoint = cachedTokens.tokenEndpoint;
+            }
+
+            console.log(`[TokenManager] Using Token Endpoint: ${tokenEndpoint}`);
 
             const params = new URLSearchParams();
             params.append('grant_type', 'password');
             params.append('username', username);
             params.append('password', password);
-            params.append('client_id', process.env.VITE_DOCUWARE_CLIENT_ID || 'docuware.platform');
-            params.append('client_secret', process.env.VITE_DOCUWARE_CLIENT_SECRET || '');
-            params.append('scope', 'docuware.platform offline_access');
+            // 'docuware.platform.net.client' is required for ROPC (Public Client)
+            params.append('client_id', 'docuware.platform.net.client');
+            // Public clients (docuware.platform) do not use client_secret
+            // params.append('client_secret', ''); 
+            params.append('scope', 'docuware.platform');
 
             const response = await axios.post(tokenEndpoint, params, {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
