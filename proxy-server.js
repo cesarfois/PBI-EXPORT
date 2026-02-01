@@ -52,7 +52,8 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization', 'x-target-url'] // Explicitly allow our custom routing header
 }));
 
-app.use(express.json()); // Enable JSON body parsing for API endpoints
+// app.use(express.json()); // MOVED: Only use for /api to avoid breaking proxy streams
+app.use('/api', express.json()); // Enable JSON body parsing ONLY for local API endpoints
 
 /**
  * Pre-flight Request Handler (OPTIONS).

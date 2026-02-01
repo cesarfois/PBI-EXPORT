@@ -44,6 +44,10 @@ const ScheduledExportsPage = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
+    // Search Preview State
+    const [previewStats, setPreviewStats] = useState({ totalCabinetDocs: 0, foundDocs: null });
+    const [isSearching, setIsSearching] = useState(false);
+
     const getProxyBaseUrl = () => {
         const isDev = import.meta.env.DEV || window.location.hostname === 'localhost';
         return isDev ? 'http://localhost:3001' : window.location.origin + '/.netlify/functions/api';
@@ -352,6 +356,17 @@ const ScheduledExportsPage = () => {
                 </div>
             </div>
 
+            {/* Global Search Preview Alert */}
+            {previewStats.foundDocs !== null && (
+                <div className="alert alert-info shadow-lg mb-4 flex flex-row items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        <FaCheckCircle />
+                        <span>Filter Preview: Found <strong>{previewStats.foundDocs}</strong> matching documents in cabinet.</span>
+                    </div>
+                    <button className="btn btn-xs btn-ghost text-xs" onClick={() => setPreviewStats(prev => ({ ...prev, foundDocs: null }))}>Dismiss</button>
+                </div>
+            )}
+
             {error && <ErrorMessage message={error} />}
             {success && <div className="alert alert-success mb-4 text-xs py-2">{success}</div>}
 
@@ -385,11 +400,37 @@ const ScheduledExportsPage = () => {
                                 // For now, `selectedCabinet` is state here. `SearchForm` calls `onCabinetChange`.
                                 // If I want to PRE-SELECT, SearchForm needs to accept it.
 
-                                onCabinetChange={(id) => {
+                                onCabinetChange={async (id) => {
                                     setSelectedCabinet(id);
+                                    // Fetch cabinet total count for display
+                                    if (id) {
+                                        try {
+                                            const count = await docuwareService.getCabinetCount(id);
+                                            setPreviewStats(prev => ({ ...prev, totalCabinetDocs: count, foundDocs: null }));
+                                        } catch (e) {
+                                            console.error(e);
+                                        }
+                                    } else {
+                                        setPreviewStats(prev => ({ ...prev, totalCabinetDocs: 0, foundDocs: null }));
+                                    }
                                 }}
                                 onFilterChange={(newFilters) => setFilters(newFilters)}
                                 onLog={(msg) => console.log(msg)}
+                                totalCount={previewStats.totalCabinetDocs}
+                                onSearch={async (cabId, filters, _, limit) => {
+                                    try {
+                                        setIsSearching(true);
+                                        // console.log('Preview Search:', cabId, filters);
+                                        const res = await docuwareService.searchDocuments(cabId, filters, limit);
+                                        setPreviewStats(prev => ({ ...prev, foundDocs: res.items.length }));
+                                        setSuccess(`Search Preview: Found ${res.items.length} documents.`);
+                                        setTimeout(() => setSuccess(''), 5000);
+                                    } catch (err) {
+                                        setError('Search Preview Failed: ' + err.message);
+                                    } finally {
+                                        setIsSearching(false);
+                                    }
+                                }}
                             />
                             {/* Hint for Edit Mode if SearchForm doesn't auto-fill */}
                             {editingId && (

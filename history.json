@@ -550,5 +550,21 @@
     "status": "SUCCESS",
     "message": "Sucesso. 213 docs com 58378 linhas.",
     "timestamp": "2026-02-01T04:16:12.946Z"
+  },
+  {
+    "id": "75d5110d-21af-476a-baa0-c53f29847797",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T14:00:00.022Z"
+  },
+  {
+    "id": "9bba235e-1098-4c0e-8a34-89f98680799b",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 docs com 58378 linhas.",
+    "timestamp": "2026-02-01T14:00:58.539Z"
   }
 ]
