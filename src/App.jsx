@@ -7,6 +7,8 @@ import WorkflowHistoryPage from './pages/WorkflowHistoryPage';
 import ExportDataPage from './pages/ExportDataPage';
 import DashboardLayout from './components/Layout/DashboardLayout';
 import CallbackPage from './pages/CallbackPage';
+import ScheduledExportsPage from './pages/ScheduledExportsPage';
+
 
 // Protected Route Wrapper
 const ProtectedRoute = ({ children }) => {
@@ -55,6 +57,16 @@ function App() {
                 <ProtectedRoute>
                   <DashboardLayout>
                     <ExportDataPage />
+                  </DashboardLayout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/scheduled-exports"
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout>
+                    <ScheduledExportsPage />
                   </DashboardLayout>
                 </ProtectedRoute>
               }

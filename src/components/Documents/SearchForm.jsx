@@ -3,7 +3,7 @@ import { docuwareService } from '../../services/docuwareService';
 import LoadingSpinner from '../Common/LoadingSpinner';
 import ErrorMessage from '../Common/ErrorMessage';
 
-const SearchForm = ({ onSearch, onLog, totalCount = 0, onCabinetChange }) => {
+const SearchForm = ({ onSearch, onLog, totalCount = 0, onCabinetChange, onFilterChange, showMainAction = true }) => {
     const [cabinets, setCabinets] = useState([]);
     const [selectedCabinet, setSelectedCabinet] = useState(''); // Start empty, validate localStorage later
     const [fields, setFields] = useState([]);
@@ -30,6 +30,13 @@ const SearchForm = ({ onSearch, onLog, totalCount = 0, onCabinetChange }) => {
             }
         }
     }, [selectedCabinet]);
+
+    // Propagate filters change
+    useEffect(() => {
+        if (onFilterChange) {
+            onFilterChange(filters);
+        }
+    }, [filters, onFilterChange]);
 
     const fetchCabinets = async () => {
         try {
@@ -361,43 +368,11 @@ const SearchForm = ({ onSearch, onLog, totalCount = 0, onCabinetChange }) => {
 
                 {/* Bottom Row: Total Count (Left) & Limit Selector + Search Button (Right) */}
                 <div className="flex justify-between items-end mt-2">
-                    {/* Total Count Display - Moved here */}
-                    <div>
-                        {selectedCabinet && (
-                            <div className="alert alert-info py-1 px-3 shadow-sm inline-flex h-8 min-h-0 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span className="text-xs">Total docs: <span className="font-bold">{totalCount}</span></span>
-                            </div>
-                        )}
-                    </div>
-
+                    {/* Placeholder for spacing if needed, or just remove entirely */}
                     {/* Limit Selector + Search Button */}
-                    <div className="flex gap-2 items-center">
-                        <div className="form-control">
-                            <label className="label py-0 px-0 mb-1">
-                                <span className="label-text text-xs">Result Limit</span>
-                            </label>
-                            <select
-                                className="select select-bordered select-sm text-xs w-32"
-                                value={resultLimit}
-                                onChange={(e) => setResultLimit(Number(e.target.value))}
-                            >
-                                <option value={100}>100</option>
-                                <option value={500}>500</option>
-                                <option value={1000}>1,000</option>
-                                <option value={2000}>2,000</option>
-                                <option value={999999}>All</option>
-                            </select>
-                        </div>
-                        <button
-                            className="btn btn-primary btn-sm self-end"
-                            onClick={handleSearch}
-                            disabled={!selectedCabinet}
-                        >
-                            Search
-                        </button>
-                    </div>
                 </div>
+
+                {/* Bottom Actions: Total & Search REMOVED as per user request */}
             </div>
         </div>
     );

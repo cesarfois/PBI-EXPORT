@@ -25,6 +25,17 @@ const PORT = 3001;
 // const app = express();
 // const PORT = 3001;
 
+import dotenv from 'dotenv';
+dotenv.config();
+
+import { scheduler } from './scheduler.js';
+import { tokenManager } from './tokenManager.js';
+
+// Initialize Services
+tokenManager.init();
+scheduler.init();
+
+
 // ----------------------------------------------------------------------------
 // 1. Global Middleware Configuration
 // ----------------------------------------------------------------------------
@@ -40,6 +51,8 @@ app.use(cors({
     credentials: true, // Allow cookies/auth headers
     allowedHeaders: ['Content-Type', 'Authorization', 'x-target-url'] // Explicitly allow our custom routing header
 }));
+
+app.use(express.json()); // Enable JSON body parsing for API endpoints
 
 /**
  * Pre-flight Request Handler (OPTIONS).
@@ -130,9 +143,10 @@ const proxyOptions = {
         return targetUrl;
     },
 
-    changeOrigin: true, // Changes the 'Host' header to match the target, required for name-based vhosting
-    secure: false, // Disables SSL verification (self-signed certs support)
-
+    changeOrigin: true, // Changes the origin of the host header to the target URL
+    secure: false, // Don't verify SSL certificates (DocuWare Cloud might need this if using self-signed locally, but usually false for proxying)
+    timeout: 300000,
+    proxyTimeout: 300000,
     /**
      * @function onProxyReq
      * @description Request Interceptor.
@@ -207,6 +221,122 @@ app.use('/DocuWare', createProxyMiddleware({
 app.use('/docuware-proxy', createProxyMiddleware(proxyOptions));
 
 // ----------------------------------------------------------------------------
+// 3.1 Auth API Routes (Centralized Token Management)
+// ----------------------------------------------------------------------------
+
+/**
+ * Save valid session from Frontend Login
+ */
+app.post('/api/auth/session', async (req, res) => {
+    try {
+        const tokens = req.body;
+        if (!tokens || !tokens.refreshToken) {
+            return res.status(400).json({ error: 'Invalid token data' });
+        }
+        await tokenManager.setTokens(tokens);
+        res.json({ status: 'ok' });
+    } catch (error) {
+        console.error('Auth Session Error:', error);
+        res.status(500).json({ error: 'Failed' });
+    }
+});
+
+/**
+ * Get valid Access Token (Refresh if needed)
+ */
+app.get('/api/auth/token', async (req, res) => {
+    try {
+        // Try getting current, if 401/error, try refresh
+        try {
+            const token = await tokenManager.getAccessToken();
+            // Verify if it's likely expired? 
+            // For now, just return it. The frontend interceptor will handle 401 by calling /refresh if we had a separate endpoint.
+            // But here "getAccessToken" just returns what we have.
+            // Let's add a `?refresh=true` flag to force refresh
+            if (req.query.refresh === 'true') {
+                const newToken = await tokenManager.refreshAccessToken();
+                return res.json({ token: newToken });
+            }
+            res.json({ token });
+        } catch (e) {
+            // Check if we need to refresh?
+            // If getAccessToken failed, it means no session.
+            res.status(401).json({ error: 'No session' });
+        }
+    } catch (error) {
+        console.error('Auth Token Error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ----------------------------------------------------------------------------
+// 3.2 Scheduler API Routes
+// ----------------------------------------------------------------------------
+
+app.get('/api/schedules/logs', async (req, res) => {
+    const logs = await scheduler.getHistory();
+    res.json(logs);
+});
+
+app.get('/api/schedules', async (req, res) => {
+    const schedules = await scheduler.getAll();
+    res.json(schedules);
+});
+
+app.post('/api/schedules', async (req, res) => {
+    try {
+        const schedule = req.body;
+        if (!schedule.id || !schedule.cronExpression) {
+            return res.status(400).json({ error: 'Invalid schedule data' });
+        }
+        const saved = await scheduler.save(schedule);
+        res.json(saved);
+        console.log(`[API] Saved schedule: ${saved.name}`);
+    } catch (error) {
+        console.error('Error saving schedule:', error);
+        res.status(500).json({ error: 'Failed to save schedule' });
+    }
+});
+
+app.delete('/api/schedules/:id', async (req, res) => {
+    try {
+        await scheduler.delete(req.params.id);
+        res.sendStatus(204);
+        console.log(`[API] Deleted schedule: ${req.params.id}`);
+    } catch (error) {
+        console.error('Error deleting schedule:', error);
+        res.status(500).json({ error: 'Failed to delete schedule' });
+    }
+});
+
+app.post('/api/schedules/:id/run', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await scheduler.forceRun(id);
+        res.json(result);
+    } catch (error) {
+        console.error('Error running schedule:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get('/api/schedules/running', (req, res) => {
+    const running = scheduler.getRunningFiles();
+    res.json(running);
+});
+
+app.post('/api/schedules/:id/stop', async (req, res) => {
+    try {
+        const { id } = req.params;
+        scheduler.abortExport(id);
+        res.json({ status: 'aborted' });
+    } catch (error) {
+        console.error('Error stopping schedule:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// ----------------------------------------------------------------------------
 // 4. Server Start (Conditional)
 // ----------------------------------------------------------------------------
 
@@ -215,13 +345,14 @@ app.use('/docuware-proxy', createProxyMiddleware(proxyOptions));
 import { fileURLToPath } from 'url';
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-    app.listen(PORT, '0.0.0.0', () => {
+    const server = app.listen(PORT, '0.0.0.0', () => {
         console.log(`===============================================`);
         console.log(`   Dynamic Proxy Server Running`);
         console.log(`   Port: ${PORT}`);
         console.log(`   Mode: Development / Audit`);
         console.log(`===============================================`);
     });
+    server.setTimeout(300000); // 5 minutes timeout to handle slow DocuWare responses
 }
 
 // Export app for Serverless usage (Netlify)

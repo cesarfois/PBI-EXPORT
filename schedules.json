@@ -1,0 +1,56 @@
+[
+  {
+    "id": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "name": "Tabela PPU",
+    "cabinetId": "04a67f02-e6a0-4370-aa96-ea2546332cae",
+    "cabinetName": "01 Comercial",
+    "filters": [
+      {
+        "fieldName": "TIPO_DE_DOCUMENTO",
+        "value": "Tabela PPU"
+      }
+    ],
+    "cronExpression": "00 11 * * *",
+    "scheduleConfig": {
+      "frequency": "daily",
+      "weekDays": [],
+      "monthDay": 1,
+      "intervalValue": 15,
+      "intervalUnit": "minutes"
+    },
+    "auth": {
+      "refreshToken": "E1B52703A22D426749CD25310153E9F050EA474C5E6B4D7570DCAE6735E59166-1",
+      "url": "https://rcsangola.docuware.cloud",
+      "tokenEndpoint": "https://login-emea.docuware.cloud/bcb91903-58eb-49c6-8572-be5e3bb9611e/connect/token"
+    },
+    "enabled": true,
+    "createdAt": "2026-02-01T02:13:57.865Z"
+  },
+  {
+    "id": "5da012be-c21b-4b09-a8bc-aa8284026d4d",
+    "name": "FIs",
+    "cabinetId": "04a67f02-e6a0-4370-aa96-ea2546332cae",
+    "cabinetName": "01 Comercial",
+    "filters": [
+      {
+        "fieldName": "TIPO_DE_DOCUMENTO",
+        "value": "Ficha de intervenção"
+      }
+    ],
+    "cronExpression": "00 10 * * *",
+    "scheduleConfig": {
+      "frequency": "daily",
+      "weekDays": [],
+      "monthDay": 1,
+      "intervalValue": 15,
+      "intervalUnit": "minutes"
+    },
+    "auth": {
+      "refreshToken": "5B1F23B2F22C6615F3B5C66C725B818E0507A15FDA4379B9BEE5A252C17128AA-1",
+      "url": "https://rcsangola.docuware.cloud",
+      "tokenEndpoint": "https://login-emea.docuware.cloud/bcb91903-58eb-49c6-8572-be5e3bb9611e/connect/token"
+    },
+    "enabled": true,
+    "createdAt": "2026-02-01T02:23:49.986Z"
+  }
+]

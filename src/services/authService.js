@@ -136,6 +136,17 @@ export const authService = {
             sessionStorage.setItem(AUTH_KEY, JSON.stringify(authData));
             sessionStorage.removeItem('docuware_pre_login_url');
 
+            // --- CENTRALIZED AUTH SYNC ---
+            // Push valid session to Backend so Scheduler can use it
+            try {
+                const proxyBase = getProxyBaseUrl();
+                await axios.post(`${proxyBase}/api/auth/session`, authData);
+                console.log('✅ Session synced with Backend!');
+            } catch (err) {
+                console.error('⚠️ Failed to sync session with Backend:', err);
+            }
+            // -----------------------------
+
             console.log('✅ Authentication successful!');
             return authData;
 
@@ -146,50 +157,32 @@ export const authService = {
     },
 
     /**
-     * Refreshes the access token using refresh token
+     * Refreshes the access token using the Backend (Centralized)
      */
     refreshToken: async () => {
-        const stored = sessionStorage.getItem(AUTH_KEY);
-        if (!stored) throw new Error('No auth data found');
-
-        const authData = JSON.parse(stored);
-        if (!authData.refreshToken) throw new Error('No refresh token');
-
         try {
-            console.log('🔄 Refreshing token...');
+            console.log('🔄 Requesting token refresh from Backend...');
+            const proxyBase = getProxyBaseUrl();
 
-            const tokenEndpoint = authData.tokenEndpoint;
-            const tokenPath = new URL(tokenEndpoint).pathname;
-            const tokenOrigin = new URL(tokenEndpoint).origin;
-            const proxiedToken = `/docuware-proxy${tokenPath}`;
+            // Ask backend to refresh (force)
+            const response = await axios.get(`${proxyBase}/api/auth/token?refresh=true`);
+            const newToken = response.data.token;
 
-            const params = new URLSearchParams();
-            params.append('grant_type', 'refresh_token');
-            params.append('refresh_token', authData.refreshToken);
-            params.append('client_id', CLIENT_ID);
-            params.append('client_secret', CLIENT_SECRET);
+            // Update local storage with new token (partial update)
+            const stored = sessionStorage.getItem(AUTH_KEY);
+            if (stored) {
+                const authData = JSON.parse(stored);
+                authData.token = newToken;
+                // Note: We don't get the new Refresh Token here unless we ask for it, 
+                // but we don't need it locally anymore if we trust the backend.
+                // However, to keep "save schedule" working (which sends authData), 
+                // we might want it. But we plan to decouple Scheduler from this authData.
+                sessionStorage.setItem(AUTH_KEY, JSON.stringify(authData));
+            }
 
-            const response = await axios.post(proxiedToken, params, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'x-target-url': tokenOrigin
-                }
-            });
-
-            const { access_token, refresh_token } = response.data;
-
-            // Update stored auth data
-            const newAuthData = {
-                ...authData,
-                token: access_token,
-                refreshToken: refresh_token || authData.refreshToken
-            };
-
-            sessionStorage.setItem(AUTH_KEY, JSON.stringify(newAuthData));
-            api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-
-            console.log('✅ Token refreshed successfully!');
-            return access_token;
+            api.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
+            console.log('✅ Token refreshed via Backend!');
+            return newToken;
 
         } catch (error) {
             console.error('❌ Token refresh failed:', error);

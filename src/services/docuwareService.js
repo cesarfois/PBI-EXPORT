@@ -177,8 +177,7 @@ export const docuwareService = {
 
         const queryBody = {
             Condition: conditions,
-            Operation: 'And', // Force strict AND logic
-            CalculateTotalCount: true
+            Operation: 'And' // Force strict AND logic
         };
 
         // POST to /Query/DialogExpression is the standard way to search
@@ -189,7 +188,8 @@ export const docuwareService = {
                 params: {
                     dialogId: searchDialog.Id,
                     count: resultLimit
-                }
+                },
+                timeout: 300000 // Increase timeout to 5 minutes for very slow queries
             }
         );
 

@@ -5,7 +5,8 @@ import {
     FaChevronRight,
     FaChevronDown,
     FaHistory,
-    FaFileCsv
+    FaFileCsv,
+    FaClock
 } from 'react-icons/fa';
 
 const STORAGE_KEY = 'sidebar_expanded_sections';
@@ -43,6 +44,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             items: [
                 { path: '/export-data', label: 'Export Data PBI', icon: <FaFileCsv /> },
                 { path: '/workflow-history', label: 'Histórico Workflow ID', icon: <FaHistory /> },
+                { path: '/scheduled-exports', label: 'Agendar Exportação', icon: <FaClock /> },
             ]
         }
     ];

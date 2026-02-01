@@ -11,12 +11,16 @@ export default defineConfig({
         target: 'http://localhost:3001', // Forward to local dynamic proxy
         changeOrigin: true,
         secure: false,
+        timeout: 300000, // 5 minutes
+        proxyTimeout: 300000,
       },
       // Proxy for Identity Service (login)
       '/docuware-proxy': {
         target: 'http://localhost:3001', // Forward to local dynamic proxy
         changeOrigin: true,
         secure: false,
+        timeout: 300000,
+        proxyTimeout: 300000,
       },
     },
   },

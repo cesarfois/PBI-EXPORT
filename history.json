@@ -1,0 +1,554 @@
+[
+  {
+    "id": "26c2fb7c-2f9f-4579-8b13-da94bbb008f2",
+    "scheduleId": "4360cb33-265e-42d3-99a8-1c88aa524d23",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T19:45:00.022Z"
+  },
+  {
+    "id": "5f989532-2311-4a6d-a3bc-347ab752fee8",
+    "scheduleId": "4360cb33-265e-42d3-99a8-1c88aa524d23",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: Request failed with status code 400",
+    "timestamp": "2026-01-31T19:45:01.296Z"
+  },
+  {
+    "id": "d2294fe2-ac78-4073-a315-6e3d0d8c15f4",
+    "scheduleId": "db0225c0-551d-48b9-96f1-8c084222d41d",
+    "scheduleName": "TESTE",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T20:23:00.028Z"
+  },
+  {
+    "id": "cb3e50a1-f93b-40ba-ab43-d83b49b67e55",
+    "scheduleId": "db0225c0-551d-48b9-96f1-8c084222d41d",
+    "scheduleName": "TESTE",
+    "status": "SUCCESS",
+    "message": "Exportação concluída. 213 documentos processados.",
+    "timestamp": "2026-01-31T20:23:04.464Z"
+  },
+  {
+    "id": "19d5dc72-2d13-4e23-9ce8-7f0bff860dbf",
+    "scheduleId": "496c6de4-d0f3-424c-8ebe-5f235a19e859",
+    "scheduleName": "teste 2",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T21:04:00.022Z"
+  },
+  {
+    "id": "2c62bc49-b108-4270-b7c7-af1e405df288",
+    "scheduleId": "496c6de4-d0f3-424c-8ebe-5f235a19e859",
+    "scheduleName": "teste 2",
+    "status": "ERROR",
+    "message": "Falha: Request failed with status code 400",
+    "timestamp": "2026-01-31T21:04:00.862Z"
+  },
+  {
+    "id": "9680d1e2-6da4-4cc5-beb8-f8421c71bebf",
+    "scheduleId": "71fe1f02-ee8b-45be-baf6-4156f8638300",
+    "scheduleName": "Teste 3",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T21:06:00.024Z"
+  },
+  {
+    "id": "d2958214-a596-4594-99f8-c08fb5499314",
+    "scheduleId": "71fe1f02-ee8b-45be-baf6-4156f8638300",
+    "scheduleName": "Teste 3",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 linhas geradas.",
+    "timestamp": "2026-01-31T21:06:34.358Z"
+  },
+  {
+    "id": "b38f4a30-418e-4e31-b5cb-9c3e7bda59a5",
+    "scheduleId": "1ba84c3e-62a3-4d56-8446-40edbac56983",
+    "scheduleName": "TESTE5",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T21:27:00.018Z"
+  },
+  {
+    "id": "4a3eeea3-72f3-46b6-a062-97ac82ab8770",
+    "scheduleId": "1ba84c3e-62a3-4d56-8446-40edbac56983",
+    "scheduleName": "TESTE5",
+    "status": "SUCCESS",
+    "message": "Sucesso. 58378 linhas geradas.",
+    "timestamp": "2026-01-31T21:27:45.287Z"
+  },
+  {
+    "id": "f7ab33b3-3498-4014-96b3-13f611bf2c56",
+    "scheduleId": "2d9858bb-6f53-42e0-9e43-1877cfd43b4a",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T22:21:00.029Z"
+  },
+  {
+    "id": "d51a127b-1a2b-4eb0-bacd-703561e9f694",
+    "scheduleId": "2d9858bb-6f53-42e0-9e43-1877cfd43b4a",
+    "scheduleName": "Tabela PPU",
+    "status": "SUCCESS",
+    "message": "Sucesso. 58378 linhas geradas.",
+    "timestamp": "2026-01-31T22:21:44.898Z"
+  },
+  {
+    "id": "c0bb07be-0b71-46bd-93e6-2dbf419bf275",
+    "scheduleId": "2d9858bb-6f53-42e0-9e43-1877cfd43b4a",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T22:36:00.024Z"
+  },
+  {
+    "id": "3ef7dce6-d893-4f4d-9f61-bae113e6e3a5",
+    "scheduleId": "2d9858bb-6f53-42e0-9e43-1877cfd43b4a",
+    "scheduleName": "Tabela PPU",
+    "status": "ERROR",
+    "message": "Falha: Request failed with status code 400",
+    "timestamp": "2026-01-31T22:36:00.973Z"
+  },
+  {
+    "id": "124e1e43-13a3-46e0-9e80-f1a2a257438c",
+    "scheduleId": "2d9858bb-6f53-42e0-9e43-1877cfd43b4a",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T23:09:00.027Z"
+  },
+  {
+    "id": "b66e567b-ed38-4a8c-bb1b-61bead4ba6f6",
+    "scheduleId": "2d9858bb-6f53-42e0-9e43-1877cfd43b4a",
+    "scheduleName": "Tabela PPU",
+    "status": "SUCCESS",
+    "message": "Sucesso. 11609 linhas geradas.",
+    "timestamp": "2026-01-31T23:10:59.969Z"
+  },
+  {
+    "id": "4144b851-7dc9-45c0-a0b8-c4f0bfd08e23",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T23:14:00.014Z"
+  },
+  {
+    "id": "1036927c-9392-42a0-9819-5e2caeaf6661",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "ERROR",
+    "message": "Falha: Request failed with status code 400",
+    "timestamp": "2026-01-31T23:14:00.850Z"
+  },
+  {
+    "id": "5c5a11df-35a4-4ec3-aa8e-de991b312b45",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T23:16:00.028Z"
+  },
+  {
+    "id": "8297c3b0-2e67-4992-860d-35e357802035",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "SUCCESS",
+    "message": "Sucesso. 58378 linhas geradas.",
+    "timestamp": "2026-01-31T23:16:44.948Z"
+  },
+  {
+    "id": "f173244f-3398-4fd8-92ec-a2c2987a30e5",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-01-31T23:39:10.772Z"
+  },
+  {
+    "id": "0d59a663-3bca-4e95-9c5b-1f0aa7bf8525",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "ERROR",
+    "message": "Falha: Request failed with status code 400",
+    "timestamp": "2026-01-31T23:39:11.694Z"
+  },
+  {
+    "id": "2239d9d3-3d21-4f4b-8f4f-ba3c022de8fe",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-01-31T23:43:40.922Z"
+  },
+  {
+    "id": "20aa1bb3-3802-407c-9ae6-3744e026f4aa",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "ERROR",
+    "message": "Falha: Token Refresh Failed: {\"error\":\"invalid_grant\"}",
+    "timestamp": "2026-01-31T23:43:41.807Z"
+  },
+  {
+    "id": "b11e3e2d-dc89-40ec-93cc-616a3648438f",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-01-31T23:47:18.356Z"
+  },
+  {
+    "id": "7d503518-5399-4856-9dac-2dd41080c36e",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "ERROR",
+    "message": "Falha: Token Refresh Failed: {\"error\":\"invalid_grant\"}",
+    "timestamp": "2026-01-31T23:47:19.144Z"
+  },
+  {
+    "id": "b5622e17-c70f-4cc5-bd2b-db10d3016239",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-01-31T23:52:15.183Z"
+  },
+  {
+    "id": "05c68ffa-247b-4c48-9f87-8dbc34ab992b",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "ERROR",
+    "message": "Falha: Token Refresh Failed: {\"error\":\"invalid_grant\"}",
+    "timestamp": "2026-01-31T23:52:15.996Z"
+  },
+  {
+    "id": "c5197034-9a04-4a9b-af65-00c8f65326c8",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-01-31T23:54:00.039Z"
+  },
+  {
+    "id": "151d929a-8b33-410d-bf72-c5c837736f38",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "ERROR",
+    "message": "Falha: Token Refresh Failed: {\"error\":\"invalid_grant\"}",
+    "timestamp": "2026-01-31T23:54:01.269Z"
+  },
+  {
+    "id": "6473f464-b74e-42dd-a573-65ed2db66d5f",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 docs com 58378 linhas.",
+    "timestamp": "2026-01-31T23:54:42.229Z"
+  },
+  {
+    "id": "99b9c2a0-d5f1-446e-b437-d96b11d04c6b",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T00:02:23.846Z"
+  },
+  {
+    "id": "fd912346-5752-40e5-bf26-9409118bdc00",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "SUCCESS",
+    "message": "Sucesso. 1000 docs com 11589 linhas.",
+    "timestamp": "2026-02-01T00:04:24.713Z"
+  },
+  {
+    "id": "f99f90ea-088d-4fc9-a2c0-12cd3b77281f",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T00:05:36.236Z"
+  },
+  {
+    "id": "10acac88-3c6c-4529-bc3d-3f7e22d1e819",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "ERROR",
+    "message": "Cancelado pelo usuário.",
+    "timestamp": "2026-02-01T00:05:42.317Z"
+  },
+  {
+    "id": "11386219-92ce-40e6-8477-8ced3b1fd6e1",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T00:07:09.268Z"
+  },
+  {
+    "id": "e5a27cf7-d356-425e-b8d3-7cf336b27558",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 docs com 58378 linhas.",
+    "timestamp": "2026-02-01T00:07:50.371Z"
+  },
+  {
+    "id": "0dd30a04-7a1b-406e-90fb-58361596c8ae",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T00:10:55.346Z"
+  },
+  {
+    "id": "689d37d8-40b9-4a40-a97e-c9b955ff52b4",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 docs com 58378 linhas.",
+    "timestamp": "2026-02-01T00:11:36.526Z"
+  },
+  {
+    "id": "4bdc0fc0-a99b-451c-96a1-b0dbc8caa98c",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T00:15:06.692Z"
+  },
+  {
+    "id": "11bd2884-dc79-4eae-ac6d-27e1f4747a4e",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 docs com 58378 linhas.",
+    "timestamp": "2026-02-01T00:15:46.278Z"
+  },
+  {
+    "id": "0cb6ea23-679e-4b44-9222-65cd323ea5f1",
+    "scheduleId": "a4170171-3456-468d-b42e-3f07406bba49",
+    "scheduleName": "FIs",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T00:18:00.031Z"
+  },
+  {
+    "id": "e490c934-0606-4a57-9334-d13cd489fcbd",
+    "scheduleId": "a4170171-3456-468d-b42e-3f07406bba49",
+    "scheduleName": "FIs",
+    "status": "SUCCESS",
+    "message": "Sucesso. undefined docs com undefined linhas.",
+    "timestamp": "2026-02-01T00:18:02.661Z"
+  },
+  {
+    "id": "b5cfb20b-6c31-48a0-81b0-2410a27bd7db",
+    "scheduleId": "a4170171-3456-468d-b42e-3f07406bba49",
+    "scheduleName": "FIs",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T00:19:22.418Z"
+  },
+  {
+    "id": "5572122b-e7e9-4daf-9a6e-b412137a270f",
+    "scheduleId": "a4170171-3456-468d-b42e-3f07406bba49",
+    "scheduleName": "FIs",
+    "status": "SUCCESS",
+    "message": "Sucesso. 1000 docs com 13248 linhas.",
+    "timestamp": "2026-02-01T00:21:13.866Z"
+  },
+  {
+    "id": "ba5f5ba7-3870-47c1-ac72-074c17cd92ba",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T01:58:35.426Z"
+  },
+  {
+    "id": "e2590926-4e3a-4747-ba53-25a54f776305",
+    "scheduleId": "cb087f41-168c-4448-b94c-590845e404cb",
+    "scheduleName": "Tabela 1",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 docs com 58378 linhas.",
+    "timestamp": "2026-02-01T01:59:19.585Z"
+  },
+  {
+    "id": "4a87bd6c-dcfa-4c27-9f63-c7e62af09305",
+    "scheduleId": "a4170171-3456-468d-b42e-3f07406bba49",
+    "scheduleName": "FIs",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T02:07:05.969Z"
+  },
+  {
+    "id": "f786fa6d-f5f6-4b82-920c-c82bdb5cff4f",
+    "scheduleId": "a4170171-3456-468d-b42e-3f07406bba49",
+    "scheduleName": "FIs",
+    "status": "ERROR",
+    "message": "Falha: loadSchedules is not defined",
+    "timestamp": "2026-02-01T02:08:49.726Z"
+  },
+  {
+    "id": "afa2e9fc-b51e-49aa-931f-1f0a4bbfad35",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T02:12:39.718Z"
+  },
+  {
+    "id": "6a6ae07e-43fb-4bda-b599-cfa142f4166e",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "ERROR",
+    "message": "Falha: loadSchedules is not defined",
+    "timestamp": "2026-02-01T02:13:16.102Z"
+  },
+  {
+    "id": "68b042ed-567d-4846-bc92-b71be0b7b088",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T02:14:00.758Z"
+  },
+  {
+    "id": "c1a4c92d-1a8e-410c-bd65-51afbb69ed8d",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "ERROR",
+    "message": "Falha: loadSchedules is not defined",
+    "timestamp": "2026-02-01T02:14:37.339Z"
+  },
+  {
+    "id": "bf387a80-969c-4301-af91-8bb01a716f93",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T02:15:11.114Z"
+  },
+  {
+    "id": "fbe15614-325f-41fb-a69d-6ba34d4afe3d",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "ERROR",
+    "message": "Falha: loadSchedules is not defined",
+    "timestamp": "2026-02-01T02:15:45.933Z"
+  },
+  {
+    "id": "d66d6824-31da-4c6d-94fd-90a08dd2c607",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T02:19:48.366Z"
+  },
+  {
+    "id": "f2d41348-13a5-44f6-aa5d-13ac434264da",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 docs com 58378 linhas.",
+    "timestamp": "2026-02-01T02:20:31.444Z"
+  },
+  {
+    "id": "a35ba5c4-2ab3-4b0b-b171-51bb679f471a",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T02:22:02.682Z"
+  },
+  {
+    "id": "5d347ff5-911a-448a-8272-c564e8b257a8",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 docs com 58378 linhas.",
+    "timestamp": "2026-02-01T02:22:43.623Z"
+  },
+  {
+    "id": "98feecca-4439-4ae4-94cb-d7da60189115",
+    "scheduleId": "5da012be-c21b-4b09-a8bc-aa8284026d4d",
+    "scheduleName": "FIs",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T02:23:53.647Z"
+  },
+  {
+    "id": "d81f30ca-2e8a-42d9-ad53-297e638cf718",
+    "scheduleId": "5da012be-c21b-4b09-a8bc-aa8284026d4d",
+    "scheduleName": "FIs",
+    "status": "SUCCESS",
+    "message": "Sucesso. 1000 docs com 13248 linhas.",
+    "timestamp": "2026-02-01T02:25:49.275Z"
+  },
+  {
+    "id": "10ac62a0-fbc0-4b5d-b178-3697a79376df",
+    "scheduleId": "5da012be-c21b-4b09-a8bc-aa8284026d4d",
+    "scheduleName": "FIs",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T02:41:23.097Z"
+  },
+  {
+    "id": "4336988f-bed0-4665-84bc-5bfc673029b5",
+    "scheduleId": "5da012be-c21b-4b09-a8bc-aa8284026d4d",
+    "scheduleName": "FIs",
+    "status": "ERROR",
+    "message": "Cancelado pelo usuário.",
+    "timestamp": "2026-02-01T02:43:08.028Z"
+  },
+  {
+    "id": "b18dd316-8470-4d78-bc1f-f3d86ed09993",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T02:44:03.229Z"
+  },
+  {
+    "id": "e12c0dcf-7f1a-4264-91ca-40c0689789ae",
+    "scheduleId": "5da012be-c21b-4b09-a8bc-aa8284026d4d",
+    "scheduleName": "FIs",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T02:44:05.067Z"
+  },
+  {
+    "id": "9d40ecf6-e251-4af4-8abb-49b62026ffcf",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 docs com 58378 linhas.",
+    "timestamp": "2026-02-01T02:44:44.048Z"
+  },
+  {
+    "id": "f613dd17-ba61-417a-89a7-f88e5731c86d",
+    "scheduleId": "5da012be-c21b-4b09-a8bc-aa8284026d4d",
+    "scheduleName": "FIs",
+    "status": "SUCCESS",
+    "message": "Sucesso. 1000 docs com 13248 linhas.",
+    "timestamp": "2026-02-01T02:46:01.555Z"
+  },
+  {
+    "id": "018dc697-a5d9-4660-ae50-5cc4726ab679",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T04:15:29.409Z"
+  },
+  {
+    "id": "3b91c271-1917-414b-8028-e5f36e649bdb",
+    "scheduleId": "c3d9d0f9-ce3b-4fb1-9e3f-f203ef4c1674",
+    "scheduleName": "Tabela PPU",
+    "status": "SUCCESS",
+    "message": "Sucesso. 213 docs com 58378 linhas.",
+    "timestamp": "2026-02-01T04:16:12.946Z"
+  }
+]
