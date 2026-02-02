@@ -198,8 +198,8 @@ async function executeExport(schedule) {
 
         // 1. Get Access Token from Central Manager
         // Note: We ignore schedule.auth for token generation, but use it for URL/Cabinet info if needed.
-        // Actually, URL is in auth.url.
-        const token = await tokenManager.getAccessToken();
+        // actually we can just pass null, as searchDocuWare fetches fresh token now.
+        const token = null; // await tokenManager.getAccessToken();
 
         // 2. Search Documents
         const documents = await searchDocuWare(token, auth.url, cabinetId, filters);
@@ -412,40 +412,93 @@ async function executeExport(schedule) {
 
 // --- HELPER FUNCTIONS ---
 
+/**
+ * Execute an async operation with smart retry logic for 401 errors.
+ * If a 401 occurs, it attempts to refresh the token and retry the operation.
+ */
+async function executeWithRetry(operationName, operationFn) {
+    const MAX_RETRIES = 3;
+    let attempt = 0;
+
+    while (attempt < MAX_RETRIES) {
+        try {
+            return await operationFn();
+        } catch (error) {
+            attempt++;
+
+            // Check for 401 Unauthorized
+            const isAuthError = error.response && error.response.status === 401;
+
+            if (isAuthError) {
+                console.warn(`[Scheduler] ⚠️ 401 Unauthorized during '${operationName}'. Refreshing token (Attempt ${attempt}/${MAX_RETRIES})...`);
+                try {
+                    // Force a token refresh
+                    await tokenManager.refreshAccessToken();
+                    console.log(`[Scheduler] 🔄 Token refreshed. Retrying '${operationName}'...`);
+                    continue; // Retry loop immediately
+                } catch (refreshError) {
+                    console.error(`[Scheduler] ❌ Failed to refresh token during retry: ${refreshError.message}`);
+                    throw refreshError; // If refresh fails, we can't continue
+                }
+            }
+
+            // If it's not a 401, or if we ran out of retries
+            if (attempt >= MAX_RETRIES) {
+                console.error(`[Scheduler] ❌ '${operationName}' failed after ${MAX_RETRIES} attempts.`);
+                throw error;
+            }
+
+            // Optional: wait a bit before retrying non-auth errors?
+            // For now, only retrying auth errors immediately. 
+            // If we want to retry 500s, we could add logic here.
+            throw error;
+        }
+    }
+}
+
 // Token refresh is now handled by tokenManager
 // async function refreshAccessToken(auth) { ... }
 
 async function searchDocuWare(token, baseUrl, cabinetId, filters) {
-    try {
-        const dialogsRes = await axios.get(`${baseUrl}/DocuWare/Platform/FileCabinets/${cabinetId}/Dialogs`, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        const searchDialog = dialogsRes.data.Dialog.find(d => d.Type === 'Search') || dialogsRes.data.Dialog[0];
-        if (!searchDialog) throw new Error("No search dialog found");
+    return executeWithRetry('Search DocuWare', async () => {
+        // We ALWAYS get the latest token from manager before making the call, 
+        // ensuring retries use the new token.
+        const currentToken = await tokenManager.getAccessToken();
 
-        const conditions = filters.map(filter => ({
-            DBName: filter.fieldName,
-            Value: Array.isArray(filter.value) ? filter.value : [filter.value]
-        }));
+        try {
+            const dialogsRes = await axios.get(`${baseUrl}/DocuWare/Platform/FileCabinets/${cabinetId}/Dialogs`, {
+                headers: { Authorization: `Bearer ${currentToken}` }
+            });
+            const searchDialog = dialogsRes.data.Dialog.find(d => d.Type === 'Search') || dialogsRes.data.Dialog[0];
+            if (!searchDialog) throw new Error("No search dialog found");
 
-        const query = {
-            Condition: conditions,
-            Operation: 'And'
-        };
+            const conditions = filters.map(filter => ({
+                DBName: filter.fieldName,
+                Value: Array.isArray(filter.value) ? filter.value : [filter.value]
+            }));
 
-        const searchRes = await axios.post(
-            `${baseUrl}/DocuWare/Platform/FileCabinets/${cabinetId}/Query/DialogExpression?dialogId=${searchDialog.Id}&count=1000`,
-            query,
-            { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', 'Accept': 'application/json' } }
-        );
-        return searchRes.data.Items || [];
-    } catch (err) {
-        if (err.response) {
-            console.error('[Scheduler] Search Failed:', JSON.stringify(err.response.data));
-            throw new Error(`DocuWare Search Failed: ${JSON.stringify(err.response.data)}`);
+            const query = {
+                Condition: conditions,
+                Operation: 'And'
+            };
+
+            const searchRes = await axios.post(
+                `${baseUrl}/DocuWare/Platform/FileCabinets/${cabinetId}/Query/DialogExpression?dialogId=${searchDialog.Id}&count=1000`,
+                query,
+                { headers: { Authorization: `Bearer ${currentToken}`, 'Content-Type': 'application/json', 'Accept': 'application/json' } }
+            );
+            return searchRes.data.Items || [];
+        } catch (err) {
+            if (err.response) {
+                // If it's NOT a 401, we log here. 401s are handled by retry wrapper.
+                if (err.response.status !== 401) {
+                    console.error('[Scheduler] Search Failed:', JSON.stringify(err.response.data));
+                }
+                throw err; // Propagate to retry wrapper
+            }
+            throw err;
         }
-        throw err;
-    }
+    });
 }
 
 /**
@@ -453,72 +506,79 @@ async function searchDocuWare(token, baseUrl, cabinetId, filters) {
  * Fetches Workflow Instances explicitly, then their steps.
  */
 async function getDocumentHistory(token, baseUrl, cabinetId, docId) {
-    try {
-        // 1. Fetch Workflow Instances for this Document
-        // Endpoint: /DocuWare/Platform/Workflow/Instances/DocumentHistory?fileCabinetId=...&documentId=...
-        const historyUrl = `${baseUrl}/DocuWare/Platform/Workflow/Instances/DocumentHistory`;
+    return executeWithRetry(`Get History ${docId}`, async () => {
+        const currentToken = await tokenManager.getAccessToken(); // Retry safe
 
-        const response = await axios.get(historyUrl, {
-            headers: { Authorization: `Bearer ${token}` },
-            params: {
-                fileCabinetId: cabinetId,
-                documentId: docId
-            }
-        });
+        try {
+            // 1. Fetch Workflow Instances for this Document
+            // Endpoint: /DocuWare/Platform/Workflow/Instances/DocumentHistory?fileCabinetId=...&documentId=...
+            const historyUrl = `${baseUrl}/DocuWare/Platform/Workflow/Instances/DocumentHistory`;
 
-        // The response contains "InstanceHistory" (Array)
-        const instances = response.data.InstanceHistory || response.data || [];
-
-        if (!Array.isArray(instances) || instances.length === 0) {
-            return [];
-        }
-
-        // 2. For each instance, fetch the Detailed History (Steps)
-        const instancesWithSteps = await Promise.all(instances.map(async (inst) => {
-            try {
-                // Construct Steps URL
-                // If 'Links' has 'self', use it. Otherwise construct.
-                // Usually: .../Workflows/{wid}/Instances/{id}/History
-
-                let stepsUrl = null;
-                const selfLink = (inst.Links || []).find(l => l.Rel === 'self' || l.rel === 'self');
-
-                if (selfLink && selfLink.Href) {
-                    // Check if full URL or relative
-                    if (selfLink.Href.startsWith('http')) {
-                        stepsUrl = selfLink.Href;
-                    } else {
-                        // Careful with double slash or missing base
-                        stepsUrl = `${baseUrl}${selfLink.Href.startsWith('/') ? '' : '/'}${selfLink.Href}`;
-                    }
-                } else {
-                    // Fallback construction
-                    stepsUrl = `${baseUrl}/DocuWare/Platform/Workflow/Workflows/${inst.WorkflowId}/Instances/${inst.Id}/History`;
+            const response = await axios.get(historyUrl, {
+                headers: { Authorization: `Bearer ${currentToken}` },
+                params: {
+                    fileCabinetId: cabinetId,
+                    documentId: docId
                 }
+            });
 
-                const stepsRes = await axios.get(stepsUrl, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+            // The response contains "InstanceHistory" (Array)
+            const instances = response.data.InstanceHistory || response.data || [];
 
-                return {
-                    ...inst,
-                    HistorySteps: stepsRes.data.HistorySteps || stepsRes.data || []
-                };
-
-            } catch (stepErr) {
-                console.warn(`[Scheduler] Failed steps fetch for inst ${inst.Id}: ${stepErr.message}`);
-                return { ...inst, HistorySteps: [] };
+            if (!Array.isArray(instances) || instances.length === 0) {
+                return [];
             }
-        }));
 
-        return instancesWithSteps;
+            // 2. For each instance, fetch the Detailed History (Steps)
+            const instancesWithSteps = await Promise.all(instances.map(async (inst) => {
+                try {
+                    // Construct Steps URL
+                    // If 'Links' has 'self', use it. Otherwise construct.
+                    // Usually: .../Workflows/{wid}/Instances/{id}/History
 
-    } catch (err) {
-        // If 404, just means no workflow history usually
-        if (err.response && err.response.status === 404) return [];
-        console.error(`[Scheduler] Workflow History Error for ${docId}:`, err.message);
-        throw err;
-    }
+                    let stepsUrl = null;
+                    const selfLink = (inst.Links || []).find(l => l.Rel === 'self' || l.rel === 'self');
+
+                    if (selfLink && selfLink.Href) {
+                        // Check if full URL or relative
+                        if (selfLink.Href.startsWith('http')) {
+                            stepsUrl = selfLink.Href;
+                        } else {
+                            // Careful with double slash or missing base
+                            stepsUrl = `${baseUrl}${selfLink.Href.startsWith('/') ? '' : '/'}${selfLink.Href}`;
+                        }
+                    } else {
+                        // Fallback construction
+                        stepsUrl = `${baseUrl}/DocuWare/Platform/Workflow/Workflows/${inst.WorkflowId}/Instances/${inst.Id}/History`;
+                    }
+
+                    const stepsRes = await axios.get(stepsUrl, {
+                        headers: { Authorization: `Bearer ${currentToken}` }
+                    });
+
+                    return {
+                        ...inst,
+                        HistorySteps: stepsRes.data.HistorySteps || stepsRes.data || []
+                    };
+
+                } catch (stepErr) {
+                    console.warn(`[Scheduler] Failed steps fetch for inst ${inst.Id}: ${stepErr.message}`);
+                    return { ...inst, HistorySteps: [] };
+                }
+            }));
+
+            return instancesWithSteps;
+
+        } catch (err) {
+            // If 404, just means no workflow history usually
+            if (err.response && err.response.status === 404) return [];
+            // If 401, rethrow to trigger retry
+            if (err.response && err.response.status === 401) throw err;
+
+            console.error(`[Scheduler] Workflow History Error for ${docId}:`, err.message);
+            throw err;
+        }
+    });
 }
 
 // Helper to structure request history (Pass-through since we now return structure from getDocumentHistory)

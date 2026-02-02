@@ -52,5 +52,31 @@
     },
     "enabled": true,
     "createdAt": "2026-02-01T02:23:49.986Z"
+  },
+  {
+    "id": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "name": "teste",
+    "cabinetId": "04a67f02-e6a0-4370-aa96-ea2546332cae",
+    "cabinetName": "01 Comercial",
+    "filters": [],
+    "cronExpression": "*/15 * * * *",
+    "scheduleConfig": {
+      "frequency": "interval",
+      "weekDays": [],
+      "monthDay": 1,
+      "intervalValue": 15,
+      "intervalUnit": "minutes"
+    },
+    "storageConfig": {
+      "type": "csv",
+      "sql": null
+    },
+    "auth": {
+      "refreshToken": "559CB76F88C313544A7B5693253D091F398015D630C360A278A8B8C5861EB076-1",
+      "url": "https://rcsangola.docuware.cloud",
+      "tokenEndpoint": "https://login-emea.docuware.cloud/bcb91903-58eb-49c6-8572-be5e3bb9611e/connect/token"
+    },
+    "enabled": true,
+    "createdAt": "2026-02-01T20:40:44.279Z"
   }
 ]

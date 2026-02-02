@@ -43,17 +43,26 @@ export const tokenManager = {
     getAccessToken: async () => {
         // 1. Try Cached Token first
         if (cachedTokens && cachedTokens.token) {
-            return cachedTokens.token;
+            const now = Date.now();
+            // Buffer of 5 minutes (300000ms) to ensure safety
+            if (cachedTokens.expiresAt && now < (cachedTokens.expiresAt - 300000)) {
+                return cachedTokens.token;
+            }
+            console.warn('[TokenManager] Cached token expired or expiring soon. Refreshing...');
         }
 
-        console.warn('[TokenManager] No active session found. Attempting Service Account fallback...');
-
-        // 2. Fallback to Service Account
+        // 2. Refresh or Fallback
         try {
-            return await tokenManager.loginWithServiceAccount();
+            return await tokenManager.refreshAccessToken();
         } catch (e) {
-            console.error('[TokenManager] All auth methods failed.');
-            throw new Error('No authentication session found and Service Account failed. Please login via the App.');
+            console.warn('[TokenManager] Refresh failed. Attempting Service Account fallback...');
+            // 3. Fallback to Service Account
+            try {
+                return await tokenManager.loginWithServiceAccount();
+            } catch (fatalError) {
+                console.error('[TokenManager] All auth methods failed.');
+                throw new Error('No authentication session found and Service Account failed. Please login via the App.');
+            }
         }
     },
 

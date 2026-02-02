@@ -566,5 +566,341 @@
     "status": "SUCCESS",
     "message": "Sucesso. 213 docs com 58378 linhas.",
     "timestamp": "2026-02-01T14:00:58.539Z"
+  },
+  {
+    "id": "63a346e6-491e-4dee-bf3f-78267b41954f",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T20:24:24.247Z"
+  },
+  {
+    "id": "69b39251-0be7-4c68-a275-5672f358f51d",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "SUCCESS",
+    "message": "Sucesso. 1 docs com 3 linhas.",
+    "timestamp": "2026-02-01T20:24:26.070Z"
+  },
+  {
+    "id": "2d295964-68a6-4fbf-b62f-c90f3cbb48d9",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação manual...",
+    "timestamp": "2026-02-01T20:40:51.566Z"
+  },
+  {
+    "id": "b052f286-3450-405c-bb94-08f510e85e8f",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "SUCCESS",
+    "message": "Sucesso. 1000 docs com 11534 linhas.",
+    "timestamp": "2026-02-01T20:42:47.129Z"
+  },
+  {
+    "id": "456c34ab-445f-4fca-9c4e-60812f37bd0d",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T20:45:00.032Z"
+  },
+  {
+    "id": "4343f3d5-6c0f-4533-953a-7001b6b86099",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "SUCCESS",
+    "message": "Sucesso. 1000 docs com 11534 linhas.",
+    "timestamp": "2026-02-01T20:46:48.708Z"
+  },
+  {
+    "id": "92882a4d-0eec-420a-aef3-e7a40510e7d3",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T21:00:00.016Z"
+  },
+  {
+    "id": "acb5664f-39f0-4fcf-a440-c8ce0d3c5a3d",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "SUCCESS",
+    "message": "Sucesso. 1000 docs com 11534 linhas.",
+    "timestamp": "2026-02-01T21:01:52.689Z"
+  },
+  {
+    "id": "33222ff9-642f-42b6-8100-e5c3c9dd58b9",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T21:15:00.027Z"
+  },
+  {
+    "id": "22251564-b7e6-4e5b-bd3b-da607dddd67b",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T21:15:05.772Z"
+  },
+  {
+    "id": "ea084ea4-920b-484e-bb8c-276b9600bba1",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T21:30:00.026Z"
+  },
+  {
+    "id": "3a417341-1bdc-4356-b3d0-3be9967908bc",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T21:30:05.715Z"
+  },
+  {
+    "id": "47e49bde-5ef0-466a-a1a1-dcff7505bb3e",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T21:45:00.028Z"
+  },
+  {
+    "id": "ee5eb1da-4f37-4db5-882c-9bb696a32eef",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T21:45:05.788Z"
+  },
+  {
+    "id": "9037533e-79fd-4ac7-8c9a-13b456c69644",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T22:00:00.022Z"
+  },
+  {
+    "id": "519ec847-d9d5-48e0-8e17-2ec5002229c6",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T22:00:05.688Z"
+  },
+  {
+    "id": "1d34ef98-874d-4a39-9be0-fa78592c7cd2",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T22:15:00.022Z"
+  },
+  {
+    "id": "2bd6a302-5205-4639-a5e2-5f735888c980",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T22:15:05.711Z"
+  },
+  {
+    "id": "e5dd7c9f-fd74-4d22-b79f-df916da328e6",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T22:30:00.021Z"
+  },
+  {
+    "id": "efaaafde-094a-4294-8cc6-bde0db3d6e98",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T22:30:05.774Z"
+  },
+  {
+    "id": "6871e446-5f94-4a90-b3b2-7c1e62022376",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T22:45:00.035Z"
+  },
+  {
+    "id": "9e81c02d-496f-4d19-9216-b52c296ecaf2",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T22:45:05.768Z"
+  },
+  {
+    "id": "2a331364-8748-438a-8172-0a68bb732450",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T23:00:00.025Z"
+  },
+  {
+    "id": "ecfd18d4-a4d5-4f1e-a4c9-0d3ffad34182",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T23:00:05.683Z"
+  },
+  {
+    "id": "283d4e30-ed07-4bd4-891f-dd6c80af0270",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T23:15:00.021Z"
+  },
+  {
+    "id": "c9177dd9-4afe-47ae-af2c-34235173f0b3",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T23:15:05.696Z"
+  },
+  {
+    "id": "24db55ef-947e-4a9e-b299-8990acf48a11",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T23:30:00.018Z"
+  },
+  {
+    "id": "2641c385-928d-4bc8-92b4-2ac7f6c88982",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T23:30:05.750Z"
+  },
+  {
+    "id": "61296dd3-d648-4e26-9b7b-374c749f2820",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-01T23:45:00.024Z"
+  },
+  {
+    "id": "8db13c6f-1488-4c10-93ad-3f237692ce65",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-01T23:45:05.663Z"
+  },
+  {
+    "id": "728583d5-dc7b-496e-b832-0909bf647b73",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-02T00:00:00.024Z"
+  },
+  {
+    "id": "6c11bfff-a2f0-4847-8bc2-084567345907",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-02T00:00:05.649Z"
+  },
+  {
+    "id": "e17e64d4-a269-49d3-91ca-4d7c1c4edf70",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-02T00:15:00.032Z"
+  },
+  {
+    "id": "17e82dc4-a272-43a2-a9df-39df3de56013",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-02T00:15:05.683Z"
+  },
+  {
+    "id": "65ae6ff7-f254-4605-ae81-533a4601a3de",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-02T00:30:00.018Z"
+  },
+  {
+    "id": "6aadddc2-caa8-49ce-99d9-91d5f383bf68",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-02T00:30:05.670Z"
+  },
+  {
+    "id": "4b50f033-4f73-488a-8a65-9a9625978ee5",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-02T00:45:00.025Z"
+  },
+  {
+    "id": "aaba1c89-ed52-4165-9d53-d51b0b285308",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-02T00:45:05.714Z"
+  },
+  {
+    "id": "4b7561f2-5dda-41cd-a7d9-be3ca33ccd1a",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-02T01:00:00.018Z"
+  },
+  {
+    "id": "c08798b9-9e9d-4624-8625-655b9b6eb7bf",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-02T01:00:05.695Z"
+  },
+  {
+    "id": "fa906597-6883-434e-a734-98bceaa8bbd8",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "RUNNING",
+    "message": "Iniciando exportação...",
+    "timestamp": "2026-02-02T01:15:00.019Z"
+  },
+  {
+    "id": "c8694fd2-8b07-4133-8ba4-6d8e6be03922",
+    "scheduleId": "c63e89fb-cdbf-4b2d-9c2c-62c09837602e",
+    "scheduleName": "teste",
+    "status": "ERROR",
+    "message": "Falha: DocuWare Search Failed: \"\"",
+    "timestamp": "2026-02-02T01:15:05.657Z"
   }
 ]
